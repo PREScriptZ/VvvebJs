@@ -1600,7 +1600,8 @@ Vvveb.Gui = {
 			var url = "" + fileName;
 			
 
-			Vvveb.FileManager.addPage(name, title, url);
+			Vvveb.FileManager.ad
+			(name, title, url);
 			event.preventDefault();
 
 			return Vvveb.Builder.saveAjax(url, startTemplateUrl, function (data) {
@@ -1879,7 +1880,9 @@ Vvveb.FileManager = {
 		$("[data-page='" + name + "']", this.tree).addClass("active");
 		
 		this.currentPage = name;
-		var url = this.pages[name]['url'];
+
+		// allow editor to load a sample page or existing URL
+		var url = name.indexOf('.html')>0 ? name : this.pages[name]['url'];
 		
 		Vvveb.Builder.loadUrl(url + (disableCache ? (url.indexOf('?') > -1?'&':'?') + Math.random():''), 
 			function () { 
